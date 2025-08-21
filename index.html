@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo: Como Cuidar das Velas Artesanais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #d63384;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .care-tracker, .tips-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: #d63384;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ff9a9e;
+            padding-bottom: 10px;
+        }
+
+        .candle-form {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff9a9e;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .checklist-item.completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff9a9e 0%, #d63384 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 8px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #ff9a9e 0%, #d63384 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tip-card {
+            background: white;
+            border-left: 4px solid #ff9a9e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tip-card h4 {
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .safety-section {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #ffc107;
+        }
+
+        .safety-section h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .safety-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+        }
+
+        .safety-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .duration-calculator {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .calc-row {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+            align-items: center;
+        }
+
+        .calc-input {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #b3d7ff;
+            border-radius: 5px;
+        }
+
+        .calc-result {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #0c5460;
+        }
+
+        .storage-guide {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .storage-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .storage-card:hover {
+            border-color: #ff9a9e;
+            transform: translateY(-3px);
+        }
+
+        .storage-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #d63384 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .calc-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Como Cuidar das Velas Artesanais</h1>
+            <p>Guia interativo para maximizar a durabilidade e qualidade das suas velas</p>
+        </div>
+
+        <div class="main-grid">
+            <div class="care-tracker">
+                <h2 class="section-title">Checklist de Cuidados</h2>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">0% dos cuidados concluídos</p>
+
+                <div class="checklist" id="checklist">
+                    <!-- Checklist será preenchido via JavaScript -->
+                </div>
+
+                <button class="restart-btn" onclick="resetChecklist()">Reiniciar Checklist</button>
+            </div>
+
+            <div class="tips-section">
+                <h2 class="section-title">Guia de Cuidados</h2>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('first-use')">1º Uso</button>
+                    <button class="tab" onclick="showTab('maintenance')">Manutenção</button>
+                    <button class="tab" onclick="showTab('storage')">Armazenamento</button>
+                    <button class="tab" onclick="showTab('safety')">Segurança</button>
+                </div>
+
+                <div id="first-use" class="tab-content active">
+                    <div class="tip-card">
+                        <h4>Criando a "Memória de Queima"</h4>
+                        <p>Na primeira queima, deixe a vela acesa até que toda a superfície derreta uniformemente até as bordas. Isso evita a formação de túneis.</p>
+                    </div>
+
+                    <div class="duration-calculator">
+                        <h4>Calculadora de Tempo - Primeira Queima</h4>
+                        <div class="calc-row">
+                            <label>Diâmetro (cm):</label>
+                            <input type="number" class="calc-input" id="diameter" min="3" max="15" value="7" onchange="calculateFirstBurn()">
+                        </div>
+                        <div class="calc-result" id="firstBurnResult">
+                            Tempo recomendado: 2-3 horas
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Dica Importante</h4>
+                        <p>Não apague a vela até que toda a superfície tenha derretido. Isso cria uma base uniforme para todas as queimas futuras.</p>
+                    </div>
+                </div>
+
+                <div id="maintenance" class="tab-content">
+                    <div class="tip-card">
+                        <h4>Corte do Pavio</h4>
+                        <p>Antes de cada uso, corte o pavio para 0,5cm. Isso evita chama alta, fumaça e prolonga a vida da vela.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Como Apagar Corretamente</h4>
+                        <p>Use um apagador de vela ou dobre o pavio na cera derretida. Evite soprar para não gerar fumaça.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Tempo Máximo de Queima</h4>
+                        <p>Limite cada sessão a 3-4 horas. Deixe a cera esfriar completamente antes de reacender.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Limpeza do Recipiente</h4>
+                        <p>Quando terminar, remova resíduos em banho-maria e reutilize o recipiente para nova vela ou outros fins.</p>
+                    </div>
+                </div>
+
+                <div id="storage" class="tab-content">
+                    <div class="storage-guide">
+                        <div class="storage-card">
+                            <div class="storage-icon">🌡️</div>
+                            <h4>Local Fresco</h4>
+                            <p>Temperatura ambiente estável, longe de fontes de calor</p>
+                        </div>
+                        <div class="storage-card">
+                            <div class="storage-icon">💧</div>
+                            <h4>Ambiente Seco</h4>
+                            <p>Evite umidade que pode afetar a cera e o pavio</p>
+                        </div>
+                        <div class="storage-card">
+                            <div class="storage-icon">☀️</div>
+                            <h4>Sem Luz Direta</h4>
+                            <p>Proteja de luz solar que pode alterar cor e fragrância</p>
+                        </div>
+                        <div class="storage-card">
+                            <div class="storage-icon">🧹</div>
+                            <h4>Protegido</h4>
+                            <p>Com tampa ou em caixa para evitar poeira</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Preservação do Aroma</h4>
+                        <p>Se a vela tem tampa, mantenha-a fechada quando não estiver em uso. Para velas sem tampa, guarde em caixas.</p>
+                    </div>
+                </div>
+
+                <div id="safety" class="tab-content">
+                    <div class="safety-section">
+                        <h4>⚠️ Regras de Segurança Essenciais</h4>
+                        
+                        <div class="safety-item">
+                            <span class="safety-icon">👁️</span>
+                            <span>Nunca deixe vela queimando sem supervisão</span>
+                        </div>
+                        
+                        <div class="safety-item">
+                            <span class="safety-icon">👶</span>
+                            <span>Mantenha longe de crianças e animais</span>
+                        </div>
+                        
+                        <div class="safety-item">
+                            <span class="safety-icon">🔥</span>
+                            <span>Use superfícies resistentes ao calor</span>
+                        </div>
+                        
+                        <div class="safety-item">
+                            <span class="safety-icon">📏</span>
+                            <span>Distância mínima de 10cm entre velas</span>
+                        </div>
+                        
+                        <div class="safety-item">
+                            <span class="safety-icon">🚫</span>
+                            <span>Apague antes de dormir ou sair</span>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Emergências</h4>
+                        <p>Em caso de fogo, nunca use água. Use bicarbonato de sódio ou abafe com uma tampa. Tenha sempre um extintor por perto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const checklistItems = [
+            { id: 'first-burn', text: 'Fiz a primeira queima completa até as bordas', category: 'first-use' },
+            { id: 'wick-cut', text: 'Cortei o pavio para 0,5cm antes de acender', category: 'maintenance' },
+            { id: 'max-time', text: 'Limitei a queima a máximo 4 horas', category: 'maintenance' },
+            { id: 'proper-extinguish', text: 'Apaguei com apagador (não soprei)', category: 'maintenance' },
+            { id: 'cool-down', text: 'Deixei esfriar antes de reacender', category: 'maintenance' },
+            { id: 'safe-surface', text: 'Coloquei em superfície resistente ao calor', category: 'safety' },
+            { id: 'supervised', text: 'Mantive supervisão durante a queima', category: 'safety' },
+            { id: 'proper-storage', text: 'Guardei em local fresco e seco', category: 'storage' },
+            { id: 'protected', text: 'Protegi da luz solar e poeira', category: 'storage' }
+        ];
+
+        function initializeChecklist() {
+            const checklistContainer = document.getElementById('checklist');
+            checklistContainer.innerHTML = '';
+
+            checklistItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'checklist-item';
+                itemElement.innerHTML = `
+                    <input type="checkbox" id="${item.id}" onchange="updateProgress()">
+                    <label for="${item.id}">${item.text}</label>
+                `;
+                checklistContainer.appendChild(itemElement);
+            });
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            const checked = document.querySelectorAll('#checklist input[type="checkbox"]:checked');
+            const percentage = Math.round((checked.length / checkboxes.length) * 100);
+
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${percentage}% dos cuidados concluídos`;
+
+            // Update visual state of completed items
+            checkboxes.forEach(checkbox => {
+                const item = checkbox.closest('.checklist-item');
+                if (checkbox.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+            });
+
+            // Show congratulations message
+            if (percentage === 100) {
+                setTimeout(() => {
+                    alert('Parabéns! Você está cuidando perfeitamente da sua vela artesanal! 🕯️');
+                }, 500);
+            }
+        }
+
+        function resetChecklist() {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.closest('.checklist-item').classList.remove('completed');
+            });
+            updateProgress();
+        }
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content and mark tab as active
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function calculateFirstBurn() {
+            const diameter = parseFloat(document.getElementById('diameter').value);
+            let timeRange;
+
+            if (diameter <= 5) {
+                timeRange = '1-2 horas';
+            } else if (diameter <= 8) {
+                timeRange = '2-3 horas';
+            } else if (diameter <= 12) {
+                timeRange = '3-4 horas';
+            } else {
+                timeRange = '4-5 horas';
+            }
+
+            document.getElementById('firstBurnResult').textContent = `Tempo recomendado: ${timeRange}`;
+        }
+
+        // Initialize the page
+        window.addEventListener('load', function() {
+            initializeChecklist();
+            calculateFirstBurn();
+        });
+    </script>
+</body>
+</html>
